@@ -51,14 +51,7 @@ object WikipediaRanking extends WikipediaRankingInterface {
     rdd.flatMap(article => langs.map(lang =>
       (lang, article.mentionsLanguage(lang) match {case true => article case false => null})))
       .filter(_._2!= null).groupByKey()
-
-//    {
-//  for {
-//    article <-rdd
-//    lang <- langs
-//    if article.mentionsLanguage(lang)
-//  } yield(lang,article)
-//  }.groupByKey()
+  
 
   /* (2) Compute the language ranking again, but now using the inverted index. Can you notice
    *     a performance improvement?
